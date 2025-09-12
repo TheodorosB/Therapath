@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.theodorosB.therapath.ui.dashboard.navdisplay.DashboardNavDisplay
 import io.github.theodorosB.therapath.ui.theme.TherapathTheme
 
 @AndroidEntryPoint
@@ -21,12 +22,7 @@ class AppActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TherapathTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                DashboardNavDisplay()
             }
         }
     }
