@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">Therapath</string>
+    <string name="empty_string" />
+
+    <!-- Login Screen -->
+    <string name="login_title">Sign in</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_remember_me">Remember me</string>
+    <string name="login_forgot_your_password">Forgot your password?</string>
+
+    <!-- Sign Up -->
+    <string name="sign_up_title">Sign up</string>
+    <string name="sign_up_email_label">Email</string>
+    <string name="sign_up_username_label">Username</string>
+    <string name="sign_up_password_label">Password</string>
+    <string name="sign_up_already_have_account">Already have an account?</string>
+
+    <!-- Validation Rules -->
+    <string name="validation_rule_invalid_email">Invalid email address</string>
+    <string name="validation_rule_password_title">Your password must include at least:</string>
+    <string name="validation_rule_password_length">8 characters</string>
+    <string name="validation_rule_password_uppercase_letter">One uppercase letter (A-Z)</string>
+    <string name="validation_rule_password_lowercase_letter">One lowercase letter (a-z)</string>
+    <string name="validation_rule_password_special_letter">One special character (e.g., @, #, $, %)</string>
+
+    <!-- Account Settings -->
+    <string name="account_settings_change_password">Change Password</string>
+    <string name="account_settings_change_language">Change Language</string>
+
 </resources>
