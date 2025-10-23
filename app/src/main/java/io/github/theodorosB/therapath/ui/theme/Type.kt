@@ -26,17 +26,17 @@ val Typography = Typography(
     titleLarge = TextStyle(
         fontFamily = therapathFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
+        fontSize = 20.sp
     ),
     titleMedium = TextStyle(
         fontFamily = therapathFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 18.sp,
+        fontSize = 18.sp
     ),
     titleSmall = TextStyle(
         fontFamily = therapathFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 16.sp,
+        fontSize = 16.sp
     ),
     bodyLarge = TextStyle(
         fontFamily = therapathFontFamily,
@@ -56,16 +56,16 @@ val Typography = Typography(
     labelLarge = TextStyle(
         fontFamily = therapathFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontSize = 16.sp
     ),
     labelMedium = TextStyle(
         fontFamily = therapathFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
+        fontSize = 14.sp
     ),
     labelSmall = TextStyle(
         fontFamily = therapathFontFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 12.sp,
+        fontSize = 12.sp
     ),
 )
