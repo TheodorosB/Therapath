@@ -3,17 +3,23 @@
     <string name="empty_string" />
 
     <!-- Login Screen -->
+    <string name="login_welcome_title">Hello \n Sign In!</string>
+    <string name="login_next">Next</string>
     <string name="login_title">Sign in</string>
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
     <string name="login_remember_me">Remember me</string>
     <string name="login_forgot_your_password">Forgot your password?</string>
+    <string name="login_reset_password_title">Reset Password</string>
+    <string name="login_sign_in_title">Sign In</string>
+    <string name="login_dont_have_account">Don\'t have account?</string>
 
     <!-- Sign Up -->
-    <string name="sign_up_title">Sign up</string>
+    <string name="sign_up_title">Sign Up</string>
     <string name="sign_up_email_label">Email</string>
     <string name="sign_up_username_label">Username</string>
     <string name="sign_up_password_label">Password</string>
+    <string name="sign_up_confirm_password_label">Confirm Password</string>
     <string name="sign_up_already_have_account">Already have an account?</string>
 
     <!-- Validation Rules -->

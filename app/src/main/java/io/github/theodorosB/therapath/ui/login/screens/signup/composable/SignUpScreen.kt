@@ -2,15 +2,15 @@ package io.github.theodorosB.therapath.ui.login.screens.signup.composable
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.github.theodorosB.therapath.ui.login.screens.signup.model.SignUpUiState
-import io.github.theodorosB.therapath.ui.login.screens.signup.viewmodel.SignUpViewModel
+import androidx.compose.ui.res.stringResource
+import io.github.theodorosB.therapath.R
+import io.github.theodorosB.therapath.ui.login.composable.LoginScreen
+import io.github.theodorosB.therapath.ui.login.model.LoginUiState
 
 @Composable
-fun SignUpScreen() {
-    val viewModel: SignUpViewModel = hiltViewModel()
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+fun SignUpScreen(
+    uiState: State<LoginUiState>
+) {
 
     SignUpContent(
         uiState = uiState
@@ -19,7 +19,16 @@ fun SignUpScreen() {
 
 @Composable
 fun SignUpContent(
-    uiState: State<SignUpUiState>
+    uiState: State<LoginUiState>
 ) {
-
+    LoginScreen(
+        fields = uiState.value.fields,
+        title = stringResource(id = uiState.value.title.value),
+        navTitle = stringResource(id = R.string.login_sign_in_title),
+        navDescription = stringResource(id = R.string.sign_up_already_have_account),
+        submitButtonText = stringResource(id = R. string.sign_up_title),
+        canResetPassword = uiState.value.canResetPassword,
+        onSubmitClicked = uiState.value.onSubmitClicked,
+        onForgotPasswordClicked = uiState.value.onNavigateToResetPasswordScreen
+    )
 }

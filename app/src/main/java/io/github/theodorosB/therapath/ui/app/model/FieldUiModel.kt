@@ -53,6 +53,19 @@ sealed class FieldUiItem(
             ValidationRule.SpecialCharRule()
         )
     )
+
+    class ConfirmPassword: FieldUiItem(
+        label = R.string.sign_up_confirm_password_label,
+        keyboardType = KeyboardType.Password,
+        title = R.string.validation_rule_password_title,
+        validationRules = listOf(
+            ValidationRule.IsNotEmptyRule(),
+            ValidationRule.LengthRule(length = 8),
+            ValidationRule.LowerCaseRule(),
+            ValidationRule.UpperCaseRule(),
+            ValidationRule.SpecialCharRule()
+        )
+    )
 }
 
 sealed class ValidationRule(
