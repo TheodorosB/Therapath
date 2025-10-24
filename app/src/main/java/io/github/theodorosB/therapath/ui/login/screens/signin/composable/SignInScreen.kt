@@ -29,6 +29,7 @@ fun SignInContent(
         canResetPassword = uiState.value.canResetPassword,
         onSubmitClicked = uiState.value.onSubmitClicked,
         submitButtonText = stringResource(id = R. string.login_sign_in_title),
+        onNavScreenClicked = uiState.value.onNavScreenClicked,
         onForgotPasswordClicked = uiState.value.onNavigateToResetPasswordScreen
     )
 }

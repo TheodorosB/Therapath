@@ -49,6 +49,7 @@ internal fun LoginScreen(
     fields: List<FieldUiItem>,
     canResetPassword: Boolean,
     onSubmitClicked: () -> Unit,
+    onNavScreenClicked: () -> Unit,
     onForgotPasswordClicked: () -> Unit
 ) {
     Column(
@@ -69,6 +70,7 @@ internal fun LoginScreen(
             navTitle = navTitle,
             navDescription = navDescription,
             submitButtonText = submitButtonText,
+            onNavScreenClicked = onNavScreenClicked,
             onForgotPasswordClicked = onForgotPasswordClicked
         )
     }
@@ -104,6 +106,7 @@ private fun LoginContent(
     navDescription: String,
     canResetPassword: Boolean,
     onSubmitClicked: () -> Unit,
+    onNavScreenClicked: () -> Unit,
     onForgotPasswordClicked: () -> Unit
 ) {
     Column(
@@ -182,6 +185,7 @@ private fun LoginContent(
                     textAlign = TextAlign.Center
                 )
                 Text(
+                    modifier = Modifier.clickable{ onNavScreenClicked() },
                     text = navTitle,
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
@@ -193,7 +197,7 @@ private fun LoginContent(
 }
 
 @Composable
-fun LoginForgotPassword(
+private fun LoginForgotPassword(
     onForgotPasswordClicked: () -> Unit
 ) {
     Row(

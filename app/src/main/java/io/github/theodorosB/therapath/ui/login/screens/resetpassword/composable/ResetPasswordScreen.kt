@@ -30,6 +30,7 @@ fun ResetPasswordContent(
         submitButtonText = stringResource(id = R. string.login_next),
         canResetPassword = uiState.value.canResetPassword,
         onSubmitClicked = uiState.value.onSubmitClicked,
+        onNavScreenClicked = uiState.value.onNavScreenClicked,
         onForgotPasswordClicked = uiState.value.onNavigateToResetPasswordScreen
     )
 }

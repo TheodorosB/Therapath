@@ -18,6 +18,7 @@ data class LoginUiState(
     val fields: SnapshotStateList<FieldUiItem> = mutableStateListOf(),
     val loginBackStack: SnapshotStateList<LoginNavEntry> = mutableStateListOf(LoginNavEntry.SignIn),
     val onSubmitClicked: () -> Unit,
+    val onNavScreenClicked: () -> Unit,
     val onNavigateBackClicked: () -> Unit,
     val onNavigateToSignInScreen: () -> Unit,
     val onNavigateToSignUpScreen: () -> Unit,

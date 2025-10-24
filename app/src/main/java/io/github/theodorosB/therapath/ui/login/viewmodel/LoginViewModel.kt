@@ -22,6 +22,7 @@ class LoginViewModel @Inject constructor(
             onNavigateBackClicked = { onNavigateBackClicked() },
             onNavigateToSignInScreen = { navigateToSignIn() },
             onNavigateToSignUpScreen = { navigateToSignUp() },
+            onNavScreenClicked = { onNavScreenClicked() },
             onNavigateToResetPasswordScreen = { navigateToResetPassword() }
         )
     )
@@ -67,6 +68,25 @@ class LoginViewModel @Inject constructor(
 
             else -> {}
         }
+    }
+
+    private fun onNavScreenClicked() {
+        val currentScreen = _uiState.value.loginBackStack.lastOrNull()
+        when (currentScreen) {
+            is LoginNavEntry.SignIn -> {
+                _uiState.value.loginBackStack.add(LoginNavEntry.SignUp)
+            }
+
+            is LoginNavEntry.SignUp -> {
+                _uiState.value.loginBackStack.add(LoginNavEntry.SignIn)
+            }
+
+            is LoginNavEntry.ResetPassword -> {
+                _uiState.value.loginBackStack.add(LoginNavEntry.SignIn)
+            }
+            else -> {}
+        }
+        updateLoginStatus = _uiState.value.loginBackStack.lastOrNull()
     }
 
     private fun onNavigateBackClicked() {
