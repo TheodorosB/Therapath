@@ -274,7 +274,7 @@ private fun FieldItem(
         )
 
         AnimatedVisibility(
-            visible = field.isValid,
+            visible = !field.isValid,
             enter = slideInVertically { height -> height } + fadeIn(),
             exit = slideOutVertically { height -> -height } + fadeOut()
         ) {
@@ -310,11 +310,13 @@ private fun LoginValidationRules(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(validationRules, key = { it.toString() }) { rule ->
-                Text(
-                    text = stringResource(id = rule.errorMessage),
-                    style = MaterialTheme.typography.labelMedium,
-                    color = ColorLoginBackground1
-                )
+                if(!rule.isValid.value) {
+                    Text(
+                        text = stringResource(id = rule.errorMessage),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = ColorLoginBackground1
+                    )
+                }
             }
         }
     }

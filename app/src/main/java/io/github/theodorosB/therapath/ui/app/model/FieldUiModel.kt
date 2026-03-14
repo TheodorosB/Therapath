@@ -18,10 +18,14 @@ sealed class FieldUiItem(
 ) {
 
     val isValid: Boolean
-        get() = validationRules.any { !it.isValid(text = text.value) } || !alreadyExists.value
+        get() = validationRules.all { it.isValid.value }
 
     fun onUpdateText(updatedText: String) {
         text.value = updatedText
+
+        validationRules.forEach { rule ->
+            rule.isValid(updatedText)
+        }
     }
 
     class Email: FieldUiItem(
@@ -68,22 +72,23 @@ sealed class FieldUiItem(
 }
 
 sealed class ValidationRule(
-    @StringRes val errorMessage: Int = R.string.empty_string
+    @StringRes val errorMessage: Int = R.string.empty_string,
+    val isValid: MutableState<Boolean> = mutableStateOf(false)
 ) {
 
-    abstract fun isValid(text: String): Boolean
+    abstract fun isValid(text: String)
 
     class IsNotEmptyRule: ValidationRule() {
-        override fun isValid(text: String): Boolean {
-            return text.isNotBlank()
+        override fun isValid(text: String) {
+            isValid.value = text.isNotBlank()
         }
     }
 
     class EmailRule: ValidationRule(
         errorMessage = R.string.validation_rule_invalid_email
     ) {
-        override fun isValid(text: String): Boolean {
-            return text.isValidEmail()
+        override fun isValid(text: String) {
+            isValid.value = text.isValidEmail()
         }
     }
 
@@ -92,32 +97,32 @@ sealed class ValidationRule(
     ): ValidationRule(
         errorMessage = R.string.validation_rule_password_length
     ) {
-        override fun isValid(text: String): Boolean {
-            return text.length >= length
+        override fun isValid(text: String) {
+            isValid.value = text.length >= length
         }
     }
 
     class LowerCaseRule: ValidationRule(
         errorMessage = R.string.validation_rule_password_lowercase_letter
     ) {
-        override fun isValid(text: String): Boolean {
-            return text.any { it.isLowerCase() }
+        override fun isValid(text: String) {
+            isValid.value = text.any { it.isLowerCase() }
         }
     }
 
     class UpperCaseRule: ValidationRule(
         errorMessage = R.string.validation_rule_password_uppercase_letter
     ) {
-        override fun isValid(text: String): Boolean {
-            return text.any { it.isUpperCase() }
+        override fun isValid(text: String) {
+            isValid.value = text.any { it.isUpperCase() }
         }
     }
 
     class SpecialCharRule: ValidationRule(
         errorMessage = R.string.validation_rule_password_special_letter
     ) {
-        override fun isValid(text: String): Boolean {
-            return text.hasSpecialCharacter()
+        override fun isValid(text: String) {
+            isValid.value = text.hasSpecialCharacter()
         }
     }
 }
