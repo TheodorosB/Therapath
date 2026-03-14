@@ -57,7 +57,6 @@ sealed class FieldUiItem(
     class ConfirmPassword: FieldUiItem(
         label = R.string.sign_up_confirm_password_label,
         keyboardType = KeyboardType.Password,
-        title = R.string.validation_rule_password_title,
         validationRules = listOf(
             ValidationRule.IsNotEmptyRule(),
             ValidationRule.LengthRule(length = 8),
@@ -74,9 +73,7 @@ sealed class ValidationRule(
 
     abstract fun isValid(text: String): Boolean
 
-    class IsNotEmptyRule: ValidationRule(
-        errorMessage = R.string.validation_rule_password_length
-    ) {
+    class IsNotEmptyRule: ValidationRule() {
         override fun isValid(text: String): Boolean {
             return text.isNotBlank()
         }
