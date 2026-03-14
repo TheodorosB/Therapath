@@ -3,9 +3,13 @@ package io.github.theodorosB.therapath.ui.login.model
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.ui.graphics.Color
 import io.github.theodorosB.therapath.R
 import io.github.theodorosB.therapath.ui.app.model.FieldUiItem
+import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground1
+import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground2
 
 data class LoginUiState(
     val navScreens: List<LoginNavEntry> = listOf(
@@ -27,7 +31,7 @@ data class LoginUiState(
     val canResetPassword: Boolean
         get() = loginBackStack.lastOrNull { it is LoginNavEntry.SignIn } != null
 
-    val isSubmitEnabled : Boolean
+    val isSubmitEnabled: Boolean
         get() = fields.all { it.isValid }
 
     val isPasswordMatched: Boolean

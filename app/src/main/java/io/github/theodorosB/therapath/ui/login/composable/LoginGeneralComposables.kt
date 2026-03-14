@@ -64,6 +64,7 @@ internal fun LoginScreen(
     submitButtonText: String,
     fields: List<FieldUiItem>,
     canResetPassword: Boolean,
+    isSubmitEnabled: Boolean,
     onSubmitClicked: () -> Unit,
     onNavScreenClicked: () -> Unit,
     onForgotPasswordClicked: () -> Unit
@@ -81,6 +82,7 @@ internal fun LoginScreen(
 
         LoginContent(
             fields = fields,
+            isSubmitEnabled = isSubmitEnabled,
             canResetPassword = canResetPassword,
             onSubmitClicked = onSubmitClicked,
             navTitle = navTitle,
@@ -117,6 +119,7 @@ private fun LoginTitleRow(
 @Composable
 private fun LoginContent(
     fields: List<FieldUiItem>,
+    isSubmitEnabled: Boolean,
     submitButtonText: String,
     navTitle: String,
     navDescription: String,
@@ -165,14 +168,18 @@ private fun LoginContent(
                 .aspectRatio(5f)
                 .background(
                     brush = Brush.horizontalGradient(
-                        colors = listOf(
-                            ColorLoginBackground1,
-                            ColorLoginBackground2
-                        )
+                        colors = if(isSubmitEnabled) {
+                            listOf(
+                                ColorLoginBackground1,
+                                ColorLoginBackground2
+                            )
+                        } else {
+                            listOf(Color.Gray, Color.Gray)
+                        }
                     ),
                     shape = RoundedCornerShape(SpacingCustom_36dp)
                 )
-                .clickable {
+                .clickable(enabled = isSubmitEnabled) {
                     onSubmitClicked()
                 },
             verticalArrangement = Arrangement.Center,
@@ -201,7 +208,7 @@ private fun LoginContent(
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    modifier = Modifier.clickable{ onNavScreenClicked() },
+                    modifier = Modifier.clickable { onNavScreenClicked() },
                     text = navTitle,
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,

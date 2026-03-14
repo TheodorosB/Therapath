@@ -23,6 +23,7 @@ fun SignUpContent(
 ) {
     LoginScreen(
         fields = uiState.value.fields,
+        isSubmitEnabled = uiState.value.isSubmitEnabled,
         title = stringResource(id = uiState.value.title.value),
         navTitle = stringResource(id = R.string.login_sign_in_title),
         navDescription = stringResource(id = R.string.sign_up_already_have_account),
