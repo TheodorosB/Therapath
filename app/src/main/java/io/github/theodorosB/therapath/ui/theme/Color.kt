@@ -80,5 +80,7 @@ val surfaceContainerHighestDark = Color(0xFF33353A)
 val ColorBaseBackground = Color(0xFFECF0F8)
 
 val ColorFadedBlack = Color(0xFF656262)
-val ColorLoginBackground1 = Color(0xFFD30021)
+
+val ColorError = Color(0xFFD30021)
+val ColorLoginBackground1 = Color(0xFF028CA6)
 val ColorLoginBackground2 = Color(0xFF3C2072)

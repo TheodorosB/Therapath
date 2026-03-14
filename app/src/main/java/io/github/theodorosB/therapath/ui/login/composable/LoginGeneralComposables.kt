@@ -45,11 +45,13 @@ import io.github.theodorosB.therapath.R
 import io.github.theodorosB.therapath.ui.app.model.FieldUiItem
 import io.github.theodorosB.therapath.ui.app.model.ValidationRule
 import io.github.theodorosB.therapath.ui.theme.ColorBaseBackground
+import io.github.theodorosB.therapath.ui.theme.ColorError
 import io.github.theodorosB.therapath.ui.theme.ColorFadedBlack
 import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground1
 import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground2
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_100dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_12dp
+import io.github.theodorosB.therapath.ui.theme.SpacingCustom_14dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_24dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_36dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_6dp
@@ -144,7 +146,7 @@ private fun LoginContent(
     ) {
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(
-                space = SpacingCustom_6dp,
+                space = SpacingCustom_36dp,
                 alignment = Alignment.CenterVertically
             ),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -253,8 +255,8 @@ private fun FieldItem(
     ) {
         TextField(
             modifier = modifier
-                .fillMaxWidth(0.8f)
-                .aspectRatio(5.7f),
+                .fillMaxWidth(0.7f)
+                .aspectRatio(4.5f),
             value = field.text.value,
             onValueChange = {
                 field.onUpdateText(it)
@@ -316,7 +318,7 @@ private fun FieldItem(
         )
 
         AnimatedVisibility(
-            visible = !field.isValid,
+            visible = !field.isValid && field.text.value.isNotBlank(),
             enter = slideInVertically { height -> height } + fadeIn(),
             exit = slideOutVertically { height -> -height } + fadeOut()
         ) {
@@ -341,7 +343,7 @@ private fun LoginValidationRules(
         Text(
             text = stringResource(id = titleResId),
             style = MaterialTheme.typography.labelMedium,
-            color = ColorLoginBackground1
+            color = ColorError
         )
 
         LazyColumn(
@@ -356,7 +358,7 @@ private fun LoginValidationRules(
                     Text(
                         text = stringResource(id = rule.errorMessage),
                         style = MaterialTheme.typography.labelMedium,
-                        color = ColorLoginBackground1
+                        color = ColorError
                     )
                 }
             }
