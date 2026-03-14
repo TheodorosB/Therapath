@@ -13,6 +13,7 @@ sealed class FieldUiItem(
     @StringRes val title: Int = R.string.empty_string,
     val keyboardType: KeyboardType,
     val text: MutableState<String> = mutableStateOf(""),
+    val isTextHidden: MutableState<Boolean> = mutableStateOf(false),
     val alreadyExists: MutableState<Boolean> = mutableStateOf(false),
     val validationRules: List<ValidationRule> = emptyList()
 ) {
@@ -26,6 +27,10 @@ sealed class FieldUiItem(
         validationRules.forEach { rule ->
             rule.isValid(updatedText)
         }
+    }
+
+    fun toggleTextVisibility() {
+        isTextHidden.value = !isTextHidden.value
     }
 
     class Email: FieldUiItem(
@@ -49,6 +54,7 @@ sealed class FieldUiItem(
         label = R.string.sign_up_password_label,
         keyboardType = KeyboardType.Password,
         title = R.string.validation_rule_password_title,
+        isTextHidden = mutableStateOf(true),
         validationRules = listOf(
             ValidationRule.IsNotEmptyRule(),
             ValidationRule.LengthRule(length = 8),
