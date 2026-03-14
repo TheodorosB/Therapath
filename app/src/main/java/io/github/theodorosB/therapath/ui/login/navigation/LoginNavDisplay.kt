@@ -26,7 +26,7 @@ import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground1
 import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground2
 
 @Composable
-fun LoginNavDisplay() {
+internal fun LoginNavDisplay() {
 
     val viewModel: LoginViewModel = hiltViewModel()
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
