@@ -1,5 +1,10 @@
 package io.github.theodorosB.therapath.ui.login.composable
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,6 +14,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -31,14 +37,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.theodorosB.therapath.R
 import io.github.theodorosB.therapath.ui.app.model.FieldUiItem
+import io.github.theodorosB.therapath.ui.app.model.ValidationRule
 import io.github.theodorosB.therapath.ui.theme.ColorBaseBackground
 import io.github.theodorosB.therapath.ui.theme.ColorFadedBlack
 import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground1
 import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground2
+import io.github.theodorosB.therapath.ui.theme.SpacingCustom_100dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_12dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_24dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_36dp
+import io.github.theodorosB.therapath.ui.theme.SpacingCustom_6dp
 import io.github.theodorosB.therapath.ui.theme.SpacingDefault_16dp
+import io.github.theodorosB.therapath.ui.theme.SpacingEighth_2dp
 
 @Composable
 internal fun LoginScreen(
@@ -125,7 +135,7 @@ private fun LoginContent(
     ) {
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(
-                space = 24.dp,
+                space = SpacingCustom_6dp,
                 alignment = Alignment.CenterVertically
             ),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -223,38 +233,89 @@ private fun FieldItem(
     field: FieldUiItem,
     modifier: Modifier = Modifier
 ) {
-    TextField(
-        modifier = modifier
-            .fillMaxWidth(0.8f)
-            .aspectRatio(5.7f),
-        value = field.text.value,
-        onValueChange = {
-            field.onUpdateText(it)
-        },
-        label = {
-            Text(
-                text = stringResource(field.label),
-                style = MaterialTheme.typography.labelMedium,
-                color = ColorLoginBackground1
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(space = SpacingCustom_12dp, alignment = Alignment.CenterVertically)
+    ) {
+        TextField(
+            modifier = modifier
+                .fillMaxWidth(0.8f)
+                .aspectRatio(5.7f),
+            value = field.text.value,
+            onValueChange = {
+                field.onUpdateText(it)
+            },
+            label = {
+                Text(
+                    text = stringResource(field.label),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = ColorLoginBackground1
+                )
+            },
+            isError = field.alreadyExists.value,
+            textStyle = MaterialTheme.typography.titleSmall.copy(color = ColorFadedBlack),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = field.keyboardType,
+                imeAction = ImeAction.Done
+            ),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                errorContainerColor = Color.White,
+                disabledContainerColor = MaterialTheme.colorScheme.background,
+                cursorColor = MaterialTheme.colorScheme.background,
+                errorTextColor = Color.Red,
+                errorCursorColor = Color.Black,
+                focusedTextColor = Color.Black,
+                unfocusedTextColor = Color.Black,
+                unfocusedIndicatorColor = Color.Black
             )
-        },
-        isError = field.alreadyExists.value,
-        textStyle = MaterialTheme.typography.titleSmall.copy(color = ColorFadedBlack),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = field.keyboardType,
-            imeAction = ImeAction.Done
-        ),
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = Color.Transparent,
-            unfocusedContainerColor = Color.Transparent,
-            errorContainerColor = Color.White,
-            disabledContainerColor = MaterialTheme.colorScheme.background,
-            cursorColor = MaterialTheme.colorScheme.background,
-            errorTextColor = Color.Red,
-            errorCursorColor = Color.Black,
-            focusedTextColor = Color.Black,
-            unfocusedTextColor = Color.Black,
-            unfocusedIndicatorColor = Color.Black
         )
-    )
+
+        AnimatedVisibility(
+            visible = field.isValid,
+            enter = slideInVertically { height -> height } + fadeIn(),
+            exit = slideOutVertically { height -> -height } + fadeOut()
+        ) {
+            LoginValidationRules(
+                titleResId = field.title,
+                validationRules = field.validationRules
+            )
+        }
+    }
+}
+
+@Composable
+private fun LoginValidationRules(
+    titleResId: Int,
+    validationRules: List<ValidationRule>
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(id = titleResId),
+            style = MaterialTheme.typography.labelMedium,
+            color = ColorLoginBackground1
+        )
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(max = SpacingCustom_100dp),
+            verticalArrangement = Arrangement.spacedBy(space = SpacingEighth_2dp, alignment = Alignment.CenterVertically),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            items(validationRules, key = { it.toString() }) { rule ->
+                Text(
+                    text = stringResource(id = rule.errorMessage),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = ColorLoginBackground1
+                )
+            }
+        }
+    }
 }
