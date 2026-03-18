@@ -6,6 +6,7 @@ import io.github.theodorosB.therapath.ui.app.model.FieldUiItem
 import io.github.theodorosB.therapath.ui.base.BaseViewModel
 import io.github.theodorosB.therapath.ui.login.model.LoginNavEntry
 import io.github.theodorosB.therapath.ui.login.model.LoginUiState
+import io.github.theodorosB.therapath.usecase.user.update.RegisterUserUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,6 +15,7 @@ import kotlin.properties.Delegates
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
+    private val registerUserUseCase: RegisterUserUseCase,
 ) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(
@@ -59,7 +61,13 @@ class LoginViewModel @Inject constructor(
             }
 
             is LoginNavEntry.SignUp -> {
+                val username = _uiState.value.fields.find { it is FieldUiItem.Username }?.text?.value ?: ""
+                val password = _uiState.value.fields.find { it is FieldUiItem.Password }?.text?.value ?: ""
+                val email = _uiState.value.fields.find { it is FieldUiItem.Email }?.text?.value ?: ""
 
+                launch {
+                    registerUserUseCase(password = password, email = email, username = username)
+                }
             }
 
             is LoginNavEntry.ResetPassword -> {
