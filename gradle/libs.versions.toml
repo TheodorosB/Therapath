@@ -1,5 +1,6 @@
 [versions]
 agp = "8.12.1"
+datastorePreferences = "1.2.1"
 firebaseBom = "34.4.0"
 firebaseBomVersion = "32.7.0"
 hiltAndroid = "2.56.2"
@@ -21,6 +22,7 @@ uiTextGoogleFonts = "1.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "navigation3Runtime" }
