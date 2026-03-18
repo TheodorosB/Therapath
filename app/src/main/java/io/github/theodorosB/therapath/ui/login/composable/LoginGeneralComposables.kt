@@ -51,10 +51,8 @@ import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground1
 import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground2
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_100dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_12dp
-import io.github.theodorosB.therapath.ui.theme.SpacingCustom_14dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_24dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_36dp
-import io.github.theodorosB.therapath.ui.theme.SpacingCustom_6dp
 import io.github.theodorosB.therapath.ui.theme.SpacingDefault_16dp
 import io.github.theodorosB.therapath.ui.theme.SpacingEighth_2dp
 
