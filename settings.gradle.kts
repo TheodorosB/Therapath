@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Therapath"
 include(":app")
- 
+include(":shared")
