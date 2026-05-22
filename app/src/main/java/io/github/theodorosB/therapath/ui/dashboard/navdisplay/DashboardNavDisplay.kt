@@ -15,6 +15,7 @@ import androidx.navigation3.ui.NavDisplay
 import io.github.theodorosB.therapath.ui.dashboard.model.DashboardNavEntries
 import io.github.theodorosB.therapath.ui.dashboard.viewmodel.DashboardViewModel
 import io.github.theodorosB.therapath.ui.login.navigation.LoginNavDisplay
+import io.github.theodorosB.therapath.ui.splash.composable.SplashScreen
 
 @Composable
 fun DashboardNavDisplay(
@@ -39,7 +40,9 @@ fun DashboardNavDisplay(
                     DashboardNavEntries.Splash -> NavEntry(
                         key = key,
                         content = {
-
+                            SplashScreen(
+                                onAnimationEnd = uiState.value.onNavigateToLogin
+                            )
                         }
                     )
 

@@ -1,3 +1,4 @@
+/*
 package io.github.theodorosB.therapath.framework.user.datastore
 
 import androidx.datastore.core.DataStore
@@ -19,7 +20,7 @@ class UserDatastore @Inject constructor(
 
     private object PreferencesKeys {
         val UUID = stringPreferencesKey("uuid")
-        val IS_LOGIN_SAVED = booleanPreferencesKey("username")
+        val IS_LOGIN_SAVED = booleanPreferencesKey("is_login_saved")
         val SELECTED_LOCALE_LANGUAGE = stringPreferencesKey("locale")
     }
 
@@ -75,4 +76,4 @@ class UserDatastore @Inject constructor(
             it.localeLanguage
         }
     }
-}
+}*/

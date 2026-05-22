@@ -10,8 +10,9 @@ data class DashboardUiState(
         DashboardNavEntries.Lobby
     ),
     val backstackEntries: SnapshotStateList<DashboardNavEntries> = mutableStateListOf(
-        DashboardNavEntries.Login
-    )
+        DashboardNavEntries.Splash
+    ),
+    val onNavigateToLogin: () -> Unit
 )
 
 sealed class DashboardNavEntries() {
