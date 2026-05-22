@@ -3,20 +3,16 @@ package io.github.theodorosB.therapath.ui.login.model
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.ui.graphics.Color
 import io.github.theodorosB.therapath.R
 import io.github.theodorosB.therapath.ui.app.model.FieldUiItem
-import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground1
-import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground2
 
 data class LoginUiState(
     val navScreens: List<LoginNavEntry> = listOf(
         LoginNavEntry.SignIn,
         LoginNavEntry.SignUp,
         LoginNavEntry.ResetPassword,
-        LoginNavEntry.Welcome
+        LoginNavEntry.OnBoarding
     ),
     val title: MutableState<Int> = mutableIntStateOf(R.string.empty_string),
     val fields: SnapshotStateList<FieldUiItem> = mutableStateListOf(),
@@ -55,5 +51,5 @@ sealed class LoginNavEntry {
 
     object ResetPassword: LoginNavEntry()
 
-    object Welcome: LoginNavEntry()
+    object OnBoarding: LoginNavEntry()
 }

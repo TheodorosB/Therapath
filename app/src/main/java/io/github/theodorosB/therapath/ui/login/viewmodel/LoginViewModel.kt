@@ -6,6 +6,7 @@ import io.github.theodorosB.therapath.ui.app.model.FieldUiItem
 import io.github.theodorosB.therapath.ui.base.BaseViewModel
 import io.github.theodorosB.therapath.ui.login.model.LoginNavEntry
 import io.github.theodorosB.therapath.ui.login.model.LoginUiState
+import io.github.theodorosB.therapath.usecase.user.get.SignInUserUseCase
 import io.github.theodorosB.therapath.usecase.user.update.RegisterUserUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +17,7 @@ import kotlin.properties.Delegates
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val registerUserUseCase: RegisterUserUseCase,
+    private val signInUserUseCase: SignInUserUseCase
 ) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(
@@ -31,7 +33,7 @@ class LoginViewModel @Inject constructor(
 
     val uiState = _uiState.asStateFlow()
 
-    var updateLoginStatus by Delegates.observable(_uiState.value.loginBackStack.lastOrNull()) { property, oldValue, newValue ->
+    var updateLoginStatus by Delegates.observable(_uiState.value.loginBackStack.lastOrNull()) { _, _, newValue ->
         when (newValue) {
             is LoginNavEntry.SignIn -> {
                 initSignInScreen()
@@ -45,7 +47,9 @@ class LoginViewModel @Inject constructor(
                 initResetPasswordScreen()
             }
 
-            else -> {}
+            else -> {
+                _uiState.value.loginBackStack.add(LoginNavEntry.OnBoarding)
+            }
         }
     }
 
@@ -57,18 +61,26 @@ class LoginViewModel @Inject constructor(
         val currentScreen = _uiState.value.loginBackStack.lastOrNull()
         when (currentScreen) {
             is LoginNavEntry.SignIn -> {
+                val username = _uiState.value.fields.find { it is FieldUiItem.Username }?.text?.value ?: ""
+                val password = _uiState.value.fields.find { it is FieldUiItem.Password }?.text?.value ?: ""
 
+                launch {
+                    val isUserLoggedIn = signInUserUseCase(username = username, password = password)
+                    if(isUserLoggedIn) {
+                        updateLoginStatus = LoginNavEntry.OnBoarding
+                    }
+                }
             }
 
             is LoginNavEntry.SignUp -> {
                 val username = _uiState.value.fields.find { it is FieldUiItem.Username }?.text?.value ?: ""
                 val password = _uiState.value.fields.find { it is FieldUiItem.Password }?.text?.value ?: ""
-                val email = _uiState.value.fields.find { it is FieldUiItem.Email }?.text?.value ?: ""
+                val email = (_uiState.value.fields.find { it is FieldUiItem.Email }?.text?.value ?: "")
 
                 launch {
                     val isUserCreated = registerUserUseCase(password = password, email = email, username = username)
                     if(isUserCreated) {
-                        updateLoginStatus = LoginNavEntry.Welcome
+                        updateLoginStatus = LoginNavEntry.OnBoarding
                     }
                 }
             }

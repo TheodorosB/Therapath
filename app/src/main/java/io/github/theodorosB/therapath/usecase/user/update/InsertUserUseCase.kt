@@ -17,5 +17,4 @@ class RegisterUserUseCase @Inject constructor(
             false
         }
     }
-
 }

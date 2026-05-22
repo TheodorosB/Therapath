@@ -18,6 +18,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import io.github.theodorosB.therapath.ui.login.model.LoginNavEntry
+import io.github.theodorosB.therapath.ui.login.screens.onboarding.composable.OnBoardingScreen
 import io.github.theodorosB.therapath.ui.login.screens.resetpassword.composable.ResetPasswordScreen
 import io.github.theodorosB.therapath.ui.login.screens.signin.composable.SignInScreen
 import io.github.theodorosB.therapath.ui.login.screens.signup.composable.SignUpScreen
@@ -91,9 +92,10 @@ internal fun LoginNavDisplay() {
                         }
                     )
 
-                    LoginNavEntry.Welcome -> NavEntry(
+                    LoginNavEntry.OnBoarding -> NavEntry(
                         key = key,
                         content = {
+                            OnBoardingScreen()
                         }
                     )
                 }

@@ -8,7 +8,11 @@ class UserRepositoryImpl @Inject constructor(
 ): UserRepository {
 
     override suspend fun registerUser(password: String, email: String, username: String): Boolean {
-        return userDataSourceImpl.registerUser(password = password, email = email,username = username)
+        return userDataSourceImpl.registerUser(password = password, email = email, username = username)
+    }
+
+    override suspend fun signInUser(username: String, password: String): Boolean {
+        return userDataSourceImpl.signInUser(username = username, password = password)
     }
 
 }
