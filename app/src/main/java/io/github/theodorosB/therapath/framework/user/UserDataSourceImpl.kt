@@ -9,29 +9,40 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class UserDataSourceImpl @Inject constructor(
-    private val firestore: FirebaseFirestore
+    private val firestore: FirebaseFirestore,
+    private val auth: FirebaseAuth
 ): UserDataSource {
 
-    override suspend fun registerUser(password: String, email: String, username: String) {
-        val authResult = FirebaseAuth.getInstance()
-            .createUserWithEmailAndPassword(email, password)
-            .await()
+    override suspend fun registerUser(
+        email: String,
+        password: String,
+        username: String
+    ): Boolean {
 
-        val uid = authResult.user?.uid ?: return
+        return try {
 
-        val userData = mapOf(
-            "username" to username,
-            "email" to email
-        )
+            val authResult = auth
+                .createUserWithEmailAndPassword(email, password)
+                .await()
 
-        firestore.collection("users")
-            .document(uid)
-            .set(userData)
-            .addOnSuccessListener {
-                Log.d(TAG, "User added successfully with Firebase UID: $uid")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding user with UID: $uid", e)
-            }
+            val uid = authResult.user?.uid ?: return false
+
+            val userData = mapOf(
+                "uid" to uid,
+                "username" to username,
+                "email" to email
+            )
+
+            firestore
+                .collection("users")
+                .document(uid)
+                .set(userData)
+                .await()
+
+            true
+
+        } catch (e: Exception) {
+            false
+        }
     }
 }

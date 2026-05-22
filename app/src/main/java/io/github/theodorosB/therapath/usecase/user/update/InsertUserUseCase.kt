@@ -9,11 +9,12 @@ class RegisterUserUseCase @Inject constructor(
     private val userRepository: UserRepository
 ): UseCase {
 
-    suspend operator fun invoke(password: String, email: String, username: String) {
-        try {
+    suspend operator fun invoke(password: String, email: String, username: String): Boolean {
+        return try {
             userRepository.registerUser(username = username, password = password, email = email)
         } catch (ex: Exception) {
             Timber.tag(RegisterUserUseCase::class.simpleName.toString()).e(ex)
+            false
         }
     }
 

@@ -66,7 +66,10 @@ class LoginViewModel @Inject constructor(
                 val email = _uiState.value.fields.find { it is FieldUiItem.Email }?.text?.value ?: ""
 
                 launch {
-                    registerUserUseCase(password = password, email = email, username = username)
+                    val isUserCreated = registerUserUseCase(password = password, email = email, username = username)
+                    if(isUserCreated) {
+                        updateLoginStatus = LoginNavEntry.Welcome
+                    }
                 }
             }
 
