@@ -30,6 +30,14 @@
     <string name="validation_rule_password_lowercase_letter">One lowercase letter (a-z)</string>
     <string name="validation_rule_password_special_letter">One special character (e.g., @, #, $, %)</string>
 
+    <!-- OnBoarding -->
+    <string name="onboarding_discover_the_approach_title">Discover the approach that fits you best</string>
+    <string name="onboarding_connect_with_professionals_title">Connect with the right professionals</string>
+    <string name="onboarding_build_your_journey_title">Build a healthier and more mindful journey</string>
+    <string name="onboarding_discover_the_approach_description">Explore different therapeutic methods and find the path that truly matches your personal needs and emotional journey.</string>
+    <string name="onboarding_connect_with_professionals_description">Find therapists and mental health professionals specialized in the approach that works best for you.</string>
+    <string name="onboarding_build_your_journey_description">Track your progress, reflect on your emotions, and take meaningful steps toward better mental wellbeing.</string>
+
     <!-- Account Settings -->
     <string name="account_settings_change_password">Change Password</string>
     <string name="account_settings_change_language">Change Language</string>
