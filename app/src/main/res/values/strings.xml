@@ -31,6 +31,8 @@
     <string name="validation_rule_password_special_letter">One special character (e.g., @, #, $, %)</string>
 
     <!-- OnBoarding -->
+    <string name="onboarding_button_next">Next</string>
+    <string name="onboarding_button_get_started">Get Started</string>
     <string name="onboarding_discover_the_approach_title">Discover the approach that fits you best</string>
     <string name="onboarding_connect_with_professionals_title">Connect with the right professionals</string>
     <string name="onboarding_build_your_journey_title">Build a healthier and more mindful journey</string>

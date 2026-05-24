@@ -132,16 +132,9 @@ fun OnBoardingContent(
                 Box(
                     modifier = Modifier
                         .padding(SpacingQuarter_4dp)
-                        .size(
-                            if (selected) SpacingCustom_14dp else SpacingCustom_10dp
-                        )
+                        .size(if (selected) SpacingCustom_14dp else SpacingCustom_10dp)
                         .clip(CircleShape)
-                        .background(
-                            if (selected)
-                                Color.White
-                            else
-                                Color.White.copy(alpha = 0.3f)
-                        )
+                        .background(if (selected) Color.White else Color.White.copy(alpha = 0.3f))
                 )
             }
         }
@@ -153,9 +146,7 @@ fun OnBoardingContent(
                     onFinish()
                 } else {
                     scope.launch {
-                        pagerState.animateScrollToPage(
-                            pagerState.currentPage + 1
-                        )
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
                     }
                 }
             },
@@ -165,10 +156,7 @@ fun OnBoardingContent(
         ) {
 
             Text(
-                if (pagerState.currentPage == uiState.value.pages.lastIndex)
-                    "Get Started"
-                else
-                    "Next"
+                text = stringResource(uiState.value.pages[pagerState.currentPage].buttonTextResId)
             )
         }
     }
