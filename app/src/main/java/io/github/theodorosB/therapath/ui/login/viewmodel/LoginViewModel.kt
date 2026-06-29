@@ -27,10 +27,10 @@ class LoginViewModel @Inject constructor(
             onNavigateToSignInScreen = { navigateToSignIn() },
             onNavigateToSignUpScreen = { navigateToSignUp() },
             onNavScreenClicked = { onNavScreenClicked() },
-            onNavigateToResetPasswordScreen = { navigateToResetPassword() }
+            onNavigateToResetPasswordScreen = { navigateToResetPassword() },
+            onNavigateToLobbyScreen = { navigateToLobby() }
         )
     )
-
     val uiState = _uiState.asStateFlow()
 
     var updateLoginStatus by Delegates.observable(_uiState.value.loginBackStack.lastOrNull()) { _, _, newValue ->
@@ -132,6 +132,12 @@ class LoginViewModel @Inject constructor(
 
     private fun navigateToResetPassword() {
         val targetScreen = LoginNavEntry.ResetPassword
+        _uiState.value.loginBackStack.add(targetScreen)
+        updateLoginStatus = targetScreen
+    }
+
+    private fun navigateToLobby() {
+        val targetScreen = LoginNavEntry.LobbyNavDisplay
         _uiState.value.loginBackStack.add(targetScreen)
         updateLoginStatus = targetScreen
     }

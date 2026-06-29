@@ -22,6 +22,7 @@ data class LoginUiState(
     val onNavigateBackClicked: () -> Unit,
     val onNavigateToSignInScreen: () -> Unit,
     val onNavigateToSignUpScreen: () -> Unit,
+    val onNavigateToLobbyScreen: () -> Unit,
     val onNavigateToResetPasswordScreen: () -> Unit,
 ) {
     val canResetPassword: Boolean
@@ -52,4 +53,6 @@ sealed class LoginNavEntry {
     object ResetPassword: LoginNavEntry()
 
     object OnBoarding: LoginNavEntry()
+
+    object LobbyNavDisplay: LoginNavEntry()
 }

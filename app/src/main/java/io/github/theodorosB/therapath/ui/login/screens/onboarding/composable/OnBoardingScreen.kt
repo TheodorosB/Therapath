@@ -14,7 +14,6 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -35,20 +34,20 @@ import io.github.theodorosB.therapath.ui.login.screens.onboarding.viewmodel.OnBo
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_100dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_10dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_14dp
-import io.github.theodorosB.therapath.ui.theme.SpacingCustom_20dp
 import io.github.theodorosB.therapath.ui.theme.SpacingCustom_36dp
-import io.github.theodorosB.therapath.ui.theme.SpacingDefault_16dp
 import io.github.theodorosB.therapath.ui.theme.SpacingQuarter_4dp
 import kotlinx.coroutines.launch
 
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(
+    onFinish: () -> Unit
+) {
     val viewModel: OnBoardingViewModel = hiltViewModel()
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     OnBoardingContent(
         uiState = uiState,
-        onFinish = {}
+        onFinish = onFinish
     )
 }
 
@@ -141,7 +140,6 @@ fun OnBoardingContent(
 
         Button(
             onClick = {
-
                 if (pagerState.currentPage == uiState.value.pages.lastIndex) {
                     onFinish()
                 } else {

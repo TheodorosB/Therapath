@@ -1,4 +1,4 @@
-package io.github.theodorosB.therapath.ui.login.navigation
+package io.github.theodorosB.therapath.ui.lobby.navigation
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.slideInHorizontally
@@ -12,25 +12,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
-import io.github.theodorosB.therapath.ui.lobby.navigation.LobbyNavDisplay
-import io.github.theodorosB.therapath.ui.login.model.LoginNavEntry
-import io.github.theodorosB.therapath.ui.login.screens.onboarding.composable.OnBoardingScreen
-import io.github.theodorosB.therapath.ui.login.screens.resetpassword.composable.ResetPasswordScreen
-import io.github.theodorosB.therapath.ui.login.screens.signin.composable.SignInScreen
-import io.github.theodorosB.therapath.ui.login.screens.signup.composable.SignUpScreen
-import io.github.theodorosB.therapath.ui.login.viewmodel.LoginViewModel
+import io.github.theodorosB.therapath.ui.lobby.model.BottomNavEntry
+import io.github.theodorosB.therapath.ui.lobby.viewmodel.LobbyViewModel
 import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground1
 import io.github.theodorosB.therapath.ui.theme.ColorLoginBackground2
+import io.github.theodorosB.therapath.ui.theme.SpacingHalf_8dp
 
 @Composable
-internal fun LoginNavDisplay() {
+internal fun LobbyNavDisplay() {
 
-    val viewModel: LoginViewModel = hiltViewModel()
+    val viewModel: LobbyViewModel = hiltViewModel()
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     BackHandler {
@@ -49,10 +44,10 @@ internal fun LoginNavDisplay() {
                 )
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(space = 8.dp, alignment = Alignment.Top)
+        verticalArrangement = Arrangement.spacedBy(space = SpacingHalf_8dp, alignment = Alignment.Top)
     ) {
         NavDisplay(
-            backStack = uiState.value.loginBackStack,
+            backStack = uiState.value.lobbyBackStack,
             contentAlignment = Alignment.Center,
             transitionSpec = {
                 val enter = slideInHorizontally { fullWidth -> fullWidth }
@@ -66,46 +61,31 @@ internal fun LoginNavDisplay() {
             },
             entryProvider = { key ->
                 when (key) {
-                    LoginNavEntry.SignIn -> NavEntry(
+                    BottomNavEntry.Main -> NavEntry(
                         key = key,
                         content = {
-                            SignInScreen(
-                                uiState = uiState
-                            )
+
                         }
                     )
 
-                    LoginNavEntry.SignUp -> NavEntry(
+                    BottomNavEntry.Search -> NavEntry(
                         key = key,
                         content = {
-                            SignUpScreen(
-                                uiState = uiState
-                            )
+
                         }
                     )
 
-                    LoginNavEntry.ResetPassword -> NavEntry(
+                    BottomNavEntry.Messages -> NavEntry(
                         key = key,
                         content = {
-                            ResetPasswordScreen(
-                                uiState = uiState
-                            )
+
                         }
                     )
 
-                    LoginNavEntry.OnBoarding -> NavEntry(
+                    BottomNavEntry.Profile -> NavEntry(
                         key = key,
                         content = {
-                            OnBoardingScreen(
-                                onFinish = uiState.value.onNavigateToLobbyScreen
-                            )
-                        }
-                    )
 
-                    LoginNavEntry.LobbyNavDisplay -> NavEntry(
-                        key = key,
-                        content = {
-                            LobbyNavDisplay()
                         }
                     )
                 }
