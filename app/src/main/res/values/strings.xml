@@ -44,4 +44,11 @@
     <string name="account_settings_change_password">Change Password</string>
     <string name="account_settings_change_language">Change Language</string>
 
+    <!-- Lobby -->
+    <string name="lobby_bottom_nav_home">Home</string>
+    <string name="lobby_bottom_nav_search">Search</string>
+    <string name="lobby_bottom_nav_calendar">Calendar</string>
+    <string name="lobby_bottom_nav_messages">Messages</string>
+    <string name="lobby_bottom_nav_profile">Profile</string>
+
 </resources>

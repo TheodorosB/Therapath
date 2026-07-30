@@ -2,6 +2,7 @@ package io.github.theodorosB.therapath.ui.lobby.viewmodel
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.theodorosB.therapath.ui.base.BaseViewModel
+import io.github.theodorosB.therapath.ui.lobby.model.BottomNavBarItem
 import io.github.theodorosB.therapath.ui.lobby.model.BottomNavEntry
 import io.github.theodorosB.therapath.ui.lobby.model.LobbyUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,29 +15,15 @@ class LobbyViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(
         LobbyUiState(
-            onNavigateBackClicked = { onNavigateBackClicked() }
+            onNavigateBackClicked = { onNavigateBackClicked() },
+            onBottomNavClick = { bottomNavItem-> onBottomNavClick(item = bottomNavItem)}
         )
     )
     val uiState = _uiState.asStateFlow()
 
-    private fun navigateToMain() {
-        val targetScreen = BottomNavEntry.Main
-        _uiState.value.lobbyBackStack.add(targetScreen)
-    }
-
-    private fun navigateToMessages() {
-        val targetScreen = BottomNavEntry.Messages
-        _uiState.value.lobbyBackStack.add(targetScreen)
-    }
-
-    private fun navigateToSearch() {
-        val targetScreen = BottomNavEntry.Search
-        _uiState.value.lobbyBackStack.add(targetScreen)
-    }
-
-    private fun navigateToProfile() {
-        val targetScreen = BottomNavEntry.Profile
-        _uiState.value.lobbyBackStack.add(targetScreen)
+    private fun onBottomNavClick(item: BottomNavBarItem) {
+        _uiState.value.lobbyBackStack.add(item.route)
+        _uiState.value.bottomNavBar.forEach { it.isSelected.value = it == item }
     }
     private fun onNavigateBackClicked() {
         _uiState.value.bottomNavScreens.lastOrNull()

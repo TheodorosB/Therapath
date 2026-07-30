@@ -139,7 +139,6 @@ class LoginViewModel @Inject constructor(
     private fun navigateToLobby() {
         val targetScreen = LoginNavEntry.LobbyNavDisplay
         _uiState.value.loginBackStack.add(targetScreen)
-        updateLoginStatus = targetScreen
     }
 
     private fun resetFields() {
